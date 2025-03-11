@@ -77,3 +77,6 @@ yarn-error.log*
 coverage/
 
 cookie.txt
+
+.env
+.env.production

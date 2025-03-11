@@ -39,6 +39,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.3.0",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
@@ -48,6 +49,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"    
+    "predeploy": "cross-env VITE_API_URL=https://rulercosta.onrender.com vite build",
+    "deploy": "gh-pages -d dist"
   }
 }
