@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:5000',
+        target: process.env.VITE_API_URL || 'https://rulercosta.onrender.com' || 'http://localhost:5000' || 'http://localhost:8000',
         changeOrigin: true,
         secure: true
       },
