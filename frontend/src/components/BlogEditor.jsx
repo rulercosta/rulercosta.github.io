@@ -6,6 +6,7 @@ import { Input } from './ui/input'
 import { Checkbox } from './ui/checkbox'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from './ui/use-toast'
+import { apiPost, apiPut } from '../lib/api'
 
 const BlogEditor = ({ pageData = null, isNew = false }) => {
   const [title, setTitle] = useState('')
@@ -83,19 +84,9 @@ const BlogEditor = ({ pageData = null, isNew = false }) => {
       let response
 
       if (isNew) {
-        response = await fetch('/api/pages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(pagePayload),
-          credentials: 'include'
-        })
+        response = await apiPost('/api/pages', pagePayload)
       } else {
-        response = await fetch(`/api/pages/${pageData.slug}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(pagePayload),
-          credentials: 'include'
-        })
+        response = await apiPut(`/api/pages/${pageData.slug}`, pagePayload)
       }
 
       if (!response.ok) {

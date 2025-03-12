@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Header from '../components/Header'
 import { Github, Linkedin, Twitter } from 'lucide-react'
 import { useToast } from '../components/ui/use-toast'
+import { apiGet } from '../lib/api'
 
 const MainLayout = () => {
   const [settings, setSettings] = useState({
@@ -16,7 +17,7 @@ const MainLayout = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const response = await fetch('/api/settings')
+        const response = await apiGet('/api/settings')
         if (!response.ok) throw new Error('Failed to fetch settings')
         const data = await response.json()
         setSettings(data)

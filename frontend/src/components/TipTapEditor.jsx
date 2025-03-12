@@ -11,6 +11,7 @@ import Color from '@tiptap/extension-color'
 import Underline from '@tiptap/extension-underline'
 import Strike from '@tiptap/extension-strike'
 import { useToast } from './ui/use-toast'
+import { apiPost } from '../lib/api'
 import {
   Dialog,
   DialogContent,
@@ -876,10 +877,13 @@ const TipTapEditor = ({ content, onChange, placeholder = "Write your content her
         const formData = new FormData()
         formData.append('file', file)
         
-        const response = await fetch('/api/uploads', {
-          method: 'POST',
-          body: formData,
-          credentials: 'include'
+        const response = await apiPost('/api/uploads', formData, {
+          headers: {
+            // Don't set Content-Type here as it will be set automatically with FormData
+            // including the correct boundary string
+          },
+          // Don't JSON-stringify the body for FormData
+          rawBody: formData
         })
         
         if (!response.ok) {

@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { Button } from '../components/ui/button'
 import { formatDate } from '../lib/utils'
 import { Edit, ArrowLeft } from 'lucide-react'
+import { apiGet } from '../lib/api'
 
 const PostPage = ({ type = 'blog' }) => {
   const [post, setPost] = useState(null)
@@ -36,7 +37,7 @@ const PostPage = ({ type = 'blog' }) => {
     const fetchPost = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch(`/api/pages/${slug}`) 
+        const response = await apiGet(`/api/pages/${slug}`)
         
         if (!response.ok) {
           if (response.status === 404) {

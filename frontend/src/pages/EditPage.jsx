@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useToast } from '../components/ui/use-toast'
 import BlogEditor from '../components/BlogEditor'
+import { apiGet } from '../lib/api'
 
 const EditPage = ({ isNew = false }) => {
   const [page, setPage] = useState(null)
@@ -17,7 +18,7 @@ const EditPage = ({ isNew = false }) => {
     const fetchPage = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch(`/api/pages/${slug}`)
+        const response = await apiGet(`/api/pages/${slug}`)
         
         if (!response.ok) {
           if (response.status === 404) {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useToast } from './components/ui/use-toast'
+import { apiGet } from './lib/api'
 
 // Layouts
 import MainLayout from './layouts/MainLayout'
@@ -27,7 +28,7 @@ function App() {
     const checkAuthStatus = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch('/api/auth/status')
+        const response = await apiGet('/api/auth/status')
         if (!response.ok) throw new Error('Failed to check authentication status')
         
         const data = await response.json()
@@ -102,7 +103,7 @@ function ProtectedRoute({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('/api/auth/status')
+        const response = await apiGet('/api/auth/status')
         if (!response.ok) throw new Error('Failed to check authentication')
         
         const data = await response.json()

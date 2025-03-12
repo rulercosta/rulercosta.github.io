@@ -7,6 +7,7 @@ import { Label } from '../components/ui/label'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs'
 import TipTapEditor from '../components/TipTapEditor'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
+import { apiGet, apiPost, apiPut } from '../lib/api'
 
 const SiteSettingsPage = () => {
   const [settings, setSettings] = useState({
@@ -50,7 +51,7 @@ const SiteSettingsPage = () => {
         setIsLoading(true)
         
         // Fetch site settings
-        const settingsResponse = await fetch('/api/settings')
+        const settingsResponse = await apiGet('/api/settings')
         if (!settingsResponse.ok) throw new Error('Failed to fetch settings')
         const settingsData = await settingsResponse.json()
         
@@ -66,9 +67,7 @@ const SiteSettingsPage = () => {
         })
         
         // Fetch admin info
-        const adminResponse = await fetch('/api/auth/admin-info', {
-          credentials: 'include'
-        })
+        const adminResponse = await apiGet('/api/auth/admin-info')
         if (!adminResponse.ok) throw new Error('Failed to fetch admin info')
         const adminData = await adminResponse.json()
         
@@ -126,14 +125,7 @@ const SiteSettingsPage = () => {
     try {
       setIsSaving(true)
       
-      const response = await fetch('/api/settings', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(settings),
-        credentials: 'include'
-      })
+      const response = await apiPut('/api/settings', settings)
       
       if (!response.ok) {
         throw new Error('Failed to save settings')
@@ -225,14 +217,7 @@ const SiteSettingsPage = () => {
         new_password: passwordData.newPassword
       }
       
-      const response = await fetch('/api/auth/change-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-        credentials: 'include'
-      })
+      const response = await apiPost('/api/auth/change-password', requestBody)
       
       let data
       if (response.headers.get('content-type')?.includes('application/json')) {
@@ -318,14 +303,7 @@ const SiteSettingsPage = () => {
         password: usernameData.password
       }
       
-      const response = await fetch('/api/auth/update-username', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-        credentials: 'include'
-      })
+      const response = await apiPost('/api/auth/update-username', requestBody)
       
       let data
       if (response.headers.get('content-type')?.includes('application/json')) {

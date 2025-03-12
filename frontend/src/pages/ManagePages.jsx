@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useToast } from '../components/ui/use-toast'
 import { Button } from '../components/ui/button'
-// Fix the import path for Tabs components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import { 
   AlertDialog,
@@ -16,6 +15,7 @@ import {
 } from '../components/ui/alert-dialog'
 import { formatDate } from '../lib/utils'
 import { PlusCircle, Edit, Trash2 } from 'lucide-react'
+import { apiGet, apiDelete } from '../lib/api'
 
 const ManagePages = () => {
   const [blogPosts, setBlogPosts] = useState([])
@@ -48,13 +48,13 @@ const ManagePages = () => {
         setIsLoading(true)
         
         // Fetch blog posts
-        const blogResponse = await fetch('/api/pages?type=blog')
+        const blogResponse = await apiGet('/api/pages?type=blog')
         if (!blogResponse.ok) throw new Error('Failed to fetch blog posts')
         const blogData = await blogResponse.json()
         setBlogPosts(blogData)
         
         // Fetch regular pages (non-blog posts)
-        const pagesResponse = await fetch('/api/pages?type=page')
+        const pagesResponse = await apiGet('/api/pages?type=page')
         if (!pagesResponse.ok) throw new Error('Failed to fetch pages')
         const pagesData = await pagesResponse.json()
         setPages(pagesData)
@@ -78,10 +78,7 @@ const ManagePages = () => {
     if (!pageToDelete) return
     
     try {
-      const response = await fetch(`/api/pages/${pageToDelete.slug}`, {
-        method: 'DELETE',
-        credentials: 'include'
-      })
+      const response = await apiDelete(`/api/pages/${pageToDelete.slug}`)
       
       if (!response.ok) {
         const errorData = await response.json()

@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '../components/ui/use-toast'
+import { apiGet, apiPost } from '../lib/api'
 
 const AuthContext = createContext(null)
 
@@ -16,7 +17,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     async function checkAuthStatus() {
       try {
-        const response = await fetch('/api/auth/status')
+        const response = await apiGet('/api/auth/status')
         const data = await response.json()
         
         if (data.authenticated) {
@@ -38,12 +39,7 @@ export function AuthProvider({ children }) {
   // Login function
   const login = async (username, password) => {
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-        credentials: 'include'
-      })
+      const response = await apiPost('/api/auth/login', { username, password })
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -72,10 +68,7 @@ export function AuthProvider({ children }) {
   // Logout function
   const logout = async () => {
     try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      })
+      await apiPost('/api/auth/logout', {})
       
       setUser(null)
       

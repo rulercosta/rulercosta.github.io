@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button'
 import PostCard from '../components/PostCard'
 import { ChevronRight } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext' // Import useAuth hook
+import { apiGet } from '../lib/api'
 
 const HomePage = () => {
   const [settings, setSettings] = useState({})
@@ -20,19 +21,19 @@ const HomePage = () => {
         setIsLoading(true)
         
         // Fetch site settings
-        const settingsResponse = await fetch('/api/settings')
+        const settingsResponse = await apiGet('/api/settings')
         if (!settingsResponse.ok) throw new Error('Failed to fetch settings')
         const settingsData = await settingsResponse.json()
         setSettings(settingsData)
         
         // Fetch featured posts
-        const featuredResponse = await fetch('/api/pages?type=blog&featured=true')
+        const featuredResponse = await apiGet('/api/pages?type=blog&featured=true')
         if (!featuredResponse.ok) throw new Error('Failed to fetch featured posts')
         const featuredData = await featuredResponse.json()
         setFeaturedPosts(featuredData)
         
         // Fetch recent posts
-        const recentResponse = await fetch('/api/pages?type=blog&limit=5')
+        const recentResponse = await apiGet('/api/pages?type=blog&limit=5')
         if (!recentResponse.ok) throw new Error('Failed to fetch recent posts')
         const recentData = await recentResponse.json()
         setRecentPosts(recentData)
