@@ -4,23 +4,15 @@ My personal website and blog, built with a minimalist black and white aesthetic.
 
 ## About
 
-Neuralwired is my personal website where I share my thoughts through blog posts, showcase my projects, and provide information about my professional background. The site features a clean, minimalist design with a monospaced typeface and a strict black and white color scheme.
-
-## Features
-
-- **Blog System**: A fully-featured blog with support for rich text content
-- **Responsive Design**: Works seamlessly on mobile, tablet, and desktop devices
-- **Dark/Light Mode**: Toggle between light and dark themes
-- **Content Management**: Admin interface to create and manage content
-- **Minimalist Aesthetic**: Clean black and white design with monospaced typography
+Neuralwired is my personal website where I share my thoughts through blog posts, showcase my projects, and provide information about my professional background.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE.md) - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Contact
 
-Feel free to reach out to me through the contact information available on the website.
+Feel free to reach out to me through the provided email.
 
 ---
 
