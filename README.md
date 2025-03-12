@@ -1,4 +1,4 @@
-# Neuralwired
+# [Neuralwired](https://neuralwired.onrender.com/)
 
 My personal website and blog, built with a minimalist black and white aesthetic. This site serves as my digital home, featuring my writing, projects, and professional information.
 
