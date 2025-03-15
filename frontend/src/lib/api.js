@@ -6,12 +6,12 @@
 const getApiBaseUrl = () => {
   // For production, use the environment variable or hardcoded URL
   if (import.meta.env.PROD) {
-    return 'https://rulercosta.onrender.com';
+    return import.meta.env.VITE_API_URL || 'https://rulercosta.onrender.com';
   }
   
   // For development environment, use the backend server directly
-  return 'https://rulercosta.onrender.com';  
-  // return 'http://localhost:5000';
+  // return import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  return 'https://rulercosta.onrender.com';
 };
 
 // Export the base URL for use in components
@@ -35,25 +35,9 @@ export async function apiRequest(endpoint, options = {}) {
     }
   };
   
-  // Remove CORS headers from client-side - these should be set by the server
-  
   try {
     console.log(`API Request: ${options.method || 'GET'} ${url}`);
     const response = await fetch(url, finalOptions);
-    
-    // Add authentication debugging
-    if (endpoint === '/api/auth/status') {
-      console.log('Auth Status Response:', response);
-      const clone = response.clone();
-      clone.text().then(text => {
-        try {
-          const data = JSON.parse(text);
-          console.log('Auth Status Data:', data);
-        } catch (e) {
-          console.log('Auth Status Raw Response:', text);
-        }
-      });
-    }
     
     // Log the status of the response
     if (!response.ok) {

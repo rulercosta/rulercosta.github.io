@@ -1,7 +1,7 @@
 """
 Routes for authentication API
 """
-from flask import request, jsonify, session, current_app
+from flask import request, jsonify, session, current_app, make_response
 from functools import wraps
 from . import bp
 from app.models.database import db, AdminCredential
@@ -44,9 +44,15 @@ def login():
     admin = AdminCredential.query.filter_by(username=data['username']).first()
     
     if admin and check_password_hash(admin.password_hash, data['password']):
+        session.clear()
+        session.permanent = True  # Use permanent session
         session['logged_in'] = True
-        session['user_id'] = admin.username  # Add this line to store username
-        return jsonify({"success": True, "message": "Login successful"})
+        session['user_id'] = admin.username
+        
+        response = make_response(jsonify({"success": True, "message": "Login successful"}))
+        
+        current_app.logger.info(f"User {admin.username} logged in successfully")
+        return response
         
     return jsonify({"error": "Invalid credentials"}), 401
 
@@ -157,8 +163,10 @@ def update_username():
         return jsonify({'error': 'Password is incorrect'}), 401
     
     # Check if new username already exists
-    existing_user = AdminCredential.query.filter(AdminCredential.username == new_username, 
-                                               AdminCredential.username != current_username).first()
+    existing_user = AdminCredential.query.filter(
+        AdminCredential.username == new_username, 
+        AdminCredential.username != current_username
+    ).first()
     
     if existing_user:
         return jsonify({'error': 'Username already exists'}), 409
@@ -172,3 +180,25 @@ def update_username():
     
     current_app.logger.info(f"Admin username changed from {current_username} to {new_username}")
     return jsonify({'success': True, 'message': 'Username updated successfully'}), 200
+
+@bp.route('/debug-cookies', methods=['GET'])
+def debug_cookies():
+    """Debug endpoint to check cookie settings"""
+    cookie_config = {
+        'SESSION_COOKIE_SECURE': current_app.config.get('SESSION_COOKIE_SECURE'),
+        'SESSION_COOKIE_HTTPONLY': current_app.config.get('SESSION_COOKIE_HTTPONLY'),
+        'SESSION_COOKIE_SAMESITE': current_app.config.get('SESSION_COOKIE_SAMESITE'),
+        'PERMANENT_SESSION_LIFETIME': str(current_app.config.get('PERMANENT_SESSION_LIFETIME')),
+        'CORS_ORIGINS': current_app.config.get('CORS_ORIGINS'),
+    }
+    
+    session_info = {
+        'logged_in': session.get('logged_in'),
+        'user_id': session.get('user_id'),
+    }
+    
+    return jsonify({
+        'cookie_config': cookie_config,
+        'session_info': session_info,
+        'request_headers': dict(request.headers),
+    })

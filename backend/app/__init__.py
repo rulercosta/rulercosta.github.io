@@ -23,11 +23,22 @@ def create_app(config_name='default'):
     # Ensure the instance folder exists
     os.makedirs(app.instance_path, exist_ok=True)
     
-    # Set up CORS - ensure all necessary origins are included
+    # Set up CORS with proper credentials support
     cors_origins = app.config['CORS_ORIGINS']
     app.logger.info(f"CORS configured for origins: {cors_origins}")
-    CORS(app, resources={r"/api/*": {"origins": cors_origins}},
-         supports_credentials=True)  # Allow cookies to be sent with CORS requests
+    
+    # Fix: Configure CORS once and properly
+    CORS(app, 
+         resources={r"/api/*": {"origins": cors_origins}},
+         supports_credentials=True,
+         allow_headers=["Content-Type", "Authorization", "Accept"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+    
+    # Configure session cookie settings
+    app.config['SESSION_COOKIE_SECURE'] = True  # Require HTTPS
+    app.config['SESSION_COOKIE_HTTPONLY'] = True  # Prevent JavaScript access
+    app.config['SESSION_COOKIE_SAMESITE'] = 'None'  # Allow cross-site cookies
+    app.config['PERMANENT_SESSION_LIFETIME'] = 86400  # 24 hours in seconds
     
     # Register database functions
     from .models.database import init_app

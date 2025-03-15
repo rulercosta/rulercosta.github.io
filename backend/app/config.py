@@ -1,56 +1,55 @@
 """
-Application configuration
+Configuration for the Flask application
 """
 import os
-import secrets
+from datetime import timedelta
 
 class Config:
-    """Base configuration class"""
-    # Generate a secure random key for development
-    SECRET_KEY = os.environ.get('SECRET_KEY') or secrets.token_hex(32)
+    """Base configuration"""
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-key-please-change-in-production')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     
-    # Database configuration
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-    DATABASE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'instance', 'blog.sqlite')
-
-    # CORS configuration 
-    CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173,http://192.168.246.150:5173').split(',')    
+    # CORS configuration
+    CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:5173,https://neuralwired.onrender.com').split(',')
     
-    # Cloudinary configuration
+    # Cloudinary configuration for image uploads
     CLOUDINARY_CLOUD_NAME = os.environ.get('CLOUDINARY_CLOUD_NAME', '')
     CLOUDINARY_API_KEY = os.environ.get('CLOUDINARY_API_KEY', '')
     CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET', '')
+    
+    # Session configuration
+    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'None'
+    SESSION_TYPE = 'filesystem'
 
 class DevelopmentConfig(Config):
     """Development configuration"""
     DEBUG = True
-    TESTING = False
-
-class TestingConfig(Config):
-    """Testing configuration"""
-    DEBUG = True
-    TESTING = True
-    # Use in-memory database for testing
-    DATABASE = ':memory:'
-    # Clear DATABASE_URL to ensure tests use SQLite
-    DATABASE_URL = None
+    DATABASE = os.path.join('instance', 'app.sqlite')
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    SESSION_COOKIE_SECURE = False  # Allow HTTP in development
 
 class ProductionConfig(Config):
     """Production configuration"""
     DEBUG = False
-    TESTING = False
-    SECRET_KEY = os.environ.get('SECRET_KEY')  # Must be set in production
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    # In production, ensure these are all True:
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'None'
 
-class PostgresConfig(ProductionConfig):
-    """PostgreSQL configuration"""
-    # Use the DATABASE_URL environment variable
-    # This class ensures there's a specific config for PostgreSQL deployments
-    pass
+class TestingConfig(Config):
+    """Testing configuration"""
+    TESTING = True
+    DATABASE = 'sqlite:///:memory:'
+    DATABASE_URL = None
+    SESSION_COOKIE_SECURE = False
 
 config = {
     'development': DevelopmentConfig,
-    'testing': TestingConfig,
     'production': ProductionConfig,
-    'postgres': PostgresConfig,
+    'testing': TestingConfig,
     'default': DevelopmentConfig
 }
