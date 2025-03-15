@@ -4,14 +4,14 @@
 
 // Determine API base URL dynamically
 const getApiBaseUrl = () => {
-  // For production, use the environment variable or fallback to the hardcoded URL
+  // For production, use the environment variable or hardcoded URL
   if (import.meta.env.PROD) {
     return 'https://rulercosta.onrender.com';
   }
   
   // For development environment, use the backend server directly
-  // Don't leave this empty - Vite will proxy /api requests to itself otherwise
-  return 'http://localhost:5000';
+  return 'https://rulercosta.onrender.com';  
+  // return 'http://localhost:5000';
 };
 
 // Export the base URL for use in components
@@ -26,9 +26,34 @@ export const API_BASE_URL = getApiBaseUrl();
 export async function apiRequest(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
   
+  // Always include credentials for cross-domain requests
+  const finalOptions = {
+    ...options,
+    credentials: 'include',
+    headers: {
+      ...options.headers,
+    }
+  };
+  
+  // Remove CORS headers from client-side - these should be set by the server
+  
   try {
     console.log(`API Request: ${options.method || 'GET'} ${url}`);
-    const response = await fetch(url, options);
+    const response = await fetch(url, finalOptions);
+    
+    // Add authentication debugging
+    if (endpoint === '/api/auth/status') {
+      console.log('Auth Status Response:', response);
+      const clone = response.clone();
+      clone.text().then(text => {
+        try {
+          const data = JSON.parse(text);
+          console.log('Auth Status Data:', data);
+        } catch (e) {
+          console.log('Auth Status Raw Response:', text);
+        }
+      });
+    }
     
     // Log the status of the response
     if (!response.ok) {
@@ -64,7 +89,6 @@ export async function apiGet(endpoint, options = {}) {
   return apiRequest(endpoint, { 
     ...options, 
     method: 'GET',
-    credentials: options.credentials || 'include'
   });
 }
 
@@ -91,7 +115,6 @@ export async function apiPost(endpoint, data, options = {}) {
     headers,
     // Only stringify JSON bodies, not FormData
     body: isFormData ? data : JSON.stringify(data),
-    credentials: options.credentials || 'include'
   });
 }
 
@@ -107,7 +130,6 @@ export async function apiPut(endpoint, data, options = {}) {
       ...options.headers,
     },
     body: JSON.stringify(data),
-    credentials: options.credentials || 'include'
   });
 }
 
@@ -118,6 +140,5 @@ export async function apiDelete(endpoint, options = {}) {
   return apiRequest(endpoint, {
     ...options,
     method: 'DELETE',
-    credentials: options.credentials || 'include'
   });
 }

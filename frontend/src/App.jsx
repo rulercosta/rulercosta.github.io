@@ -16,7 +16,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import SiteSettingsPage from './pages/SiteSettingsPage'
 
 // Auth context
-import { AuthProvider } from './contexts/AuthContext'
+import { AuthProvider, useAuth } from './contexts/AuthContext'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -97,45 +97,40 @@ function App() {
 // Protected route component
 function ProtectedRoute({ children }) {
   const navigate = useNavigate()
-  const [isAuthenticated, setIsAuthenticated] = useState(null)
+  const { isAuthenticated } = useAuth() // Use the auth context directly
+  const [checkingAuth, setCheckingAuth] = useState(true)
   const { toast } = useToast()
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await apiGet('/api/auth/status')
-        if (!response.ok) throw new Error('Failed to check authentication')
-        
-        const data = await response.json()
-        setIsAuthenticated(data.authenticated)
-        
-        if (!data.authenticated) {
-          toast({
-            variant: "destructive",
-            title: "Authentication Required",
-            description: "Please login to access this page.",
-          })
-          navigate('/login', { replace: true })
-        }
-      } catch (error) {
-        console.error('Auth check error:', error)
-        setIsAuthenticated(false)
-        navigate('/login', { replace: true })
-      }
+    // Simplified check - trust the AuthContext's isAuthenticated value
+    console.log("ProtectedRoute: Checking auth status...");
+    
+    if (!isAuthenticated) {
+      console.warn("ProtectedRoute: User not authenticated, redirecting to login");
+      toast({
+        variant: "destructive",
+        title: "Authentication Required",
+        description: "Please login to access this page.",
+      });
+      navigate('/login', { replace: true });
+    } else {
+      console.log("ProtectedRoute: User is authenticated, allowing access");
     }
+    
+    setCheckingAuth(false);
+    
+  }, [isAuthenticated, navigate, toast]);
 
-    checkAuth()
-  }, [navigate, toast])
-
-  if (isAuthenticated === null) {
+  if (checkingAuth) {
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex items-center justify-center py-20">
         <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
+        <span className="ml-2">Checking authentication...</span>
       </div>
     )
   }
 
-  return isAuthenticated ? children : null
+  return isAuthenticated ? children : null;
 }
 
 export default App
