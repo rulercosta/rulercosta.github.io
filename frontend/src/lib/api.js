@@ -36,32 +36,25 @@ export async function apiRequest(endpoint, options = {}) {
   };
   
   try {
-    console.log(`API Request: ${options.method || 'GET'} ${url}`);
     const response = await fetch(url, finalOptions);
     
     // Log the status of the response
     if (!response.ok) {
-      console.error(`API Error: ${response.status} ${response.statusText} for ${url}`);
-      
-      // Try to parse error response as JSON
       let errorData;
       try {
         const contentType = response.headers.get('content-type');
         if (contentType && contentType.includes('application/json')) {
           errorData = await response.json();
-          console.error('API Error Details:', errorData);
         } else {
           errorData = await response.text();
-          console.error('API Error Response:', errorData);
         }
       } catch (parseError) {
-        console.error('Error parsing API error response:', parseError);
+        // Silently handle parse errors
       }
     }
     
     return response;
   } catch (error) {
-    console.error(`Network error for ${url}:`, error);
     throw error;
   }
 }

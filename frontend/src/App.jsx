@@ -97,24 +97,18 @@ function App() {
 // Protected route component
 function ProtectedRoute({ children }) {
   const navigate = useNavigate()
-  const { isAuthenticated } = useAuth() // Use the auth context directly
+  const { isAuthenticated } = useAuth()
   const [checkingAuth, setCheckingAuth] = useState(true)
   const { toast } = useToast()
 
   useEffect(() => {
-    // Simplified check - trust the AuthContext's isAuthenticated value
-    console.log("ProtectedRoute: Checking auth status...");
-    
     if (!isAuthenticated) {
-      console.warn("ProtectedRoute: User not authenticated, redirecting to login");
       toast({
         variant: "destructive",
         title: "Authentication Required",
         description: "Please login to access this page.",
       });
       navigate('/login', { replace: true });
-    } else {
-      console.log("ProtectedRoute: User is authenticated, allowing access");
     }
     
     setCheckingAuth(false);

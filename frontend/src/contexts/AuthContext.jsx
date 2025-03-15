@@ -17,22 +17,16 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     async function checkAuthStatus() {
       try {
-        console.log("Checking auth status...");
         const response = await apiGet('/api/auth/status')
-        console.log("Auth status response:", response);
         
         const data = await response.json()
-        console.log("Auth status data:", data);
         
         if (data.authenticated) {
-          console.log("User is authenticated:", data.user);
           setUser({ username: data.user })
         } else {
-          console.log("User is not authenticated");
           setUser(null)
         }
       } catch (error) {
-        console.error('Error checking auth status:', error)
         setUser(null)
       } finally {
         setLoading(false)
@@ -45,7 +39,6 @@ export function AuthProvider({ children }) {
   // Login function
   const login = async (username, password) => {
     try {
-      console.log("Attempting login for:", username);
       const response = await apiPost('/api/auth/login', { username, password })
 
       if (!response.ok) {
@@ -54,7 +47,6 @@ export function AuthProvider({ children }) {
       }
 
       const data = await response.json()
-      console.log("Login successful, data:", data);
       setUser({ username })
       
       toast({
@@ -64,7 +56,6 @@ export function AuthProvider({ children }) {
       
       return { success: true }
     } catch (error) {
-      console.error("Login error:", error);
       toast({
         variant: "destructive",
         title: "Login Failed",
