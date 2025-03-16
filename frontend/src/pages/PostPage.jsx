@@ -78,13 +78,30 @@ const PostPage = ({ type = 'blog' }) => {
   // Function to ensure alignment styles are properly applied
   // Updated to handle TipTap content classes and image sizing
   const processContent = (content) => {
-    // Make sure all links open in a new tab for security
     let processedContent = content;
     if (typeof content === 'string') {
-      // Add target="_blank" to links that don't have it
+      // Get the current domain to compare against links
+      const currentDomain = window.location.hostname;
+      
+      // Process links: Add target="_blank" only to external links
       processedContent = content.replace(
-        /<a\s+(?:[^>]*?\s+)?href=(['"])(.*?)\1([^>]*?)>/gi,
-        '<a href=$1$2$1 target="_blank" rel="noopener noreferrer" $3>'
+        /<a\s+(?:[^>]*?\s+)?href=(['"])(https?:\/\/.*?)\1([^>]*?)>/gi,
+        (match, quote, url, rest) => {
+          try {
+            // Check if the URL is internal (same domain) or external
+            const linkDomain = new URL(url).hostname;
+            if (linkDomain !== currentDomain) {
+              // External link - open in new tab
+              return `<a href=${quote}${url}${quote} target="_blank" rel="noopener noreferrer" ${rest}>`;
+            } else {
+              // Internal link - keep as is
+              return match;
+            }
+          } catch (e) {
+            // If URL parsing fails, return the original match
+            return match;
+          }
+        }
       );
     }
     
