@@ -142,6 +142,12 @@ def init_app(app):
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
+    # Add connection pool settings to handle connection recycling
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'pool_pre_ping': True,     # Test connections before use to detect stale ones
+        'pool_recycle': 280        # Recycle connections after ~4.5 minutes (before Supabase's ~5 min timeout)
+    }
+    
     db.init_app(app)
     app.cli.add_command(init_db_command)
     app.teardown_appcontext(close_db)
