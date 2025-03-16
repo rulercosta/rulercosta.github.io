@@ -68,7 +68,6 @@ export function AuthProvider({ children }) {
   // Logout function
   const logout = async () => {
     try {
-      console.log("Attempting logout");
       await apiPost('/api/auth/logout', {})
       
       setUser(null)
