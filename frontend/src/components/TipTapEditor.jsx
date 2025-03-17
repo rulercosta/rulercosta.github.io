@@ -439,7 +439,7 @@ const LinkDialog = ({ editor, isOpen, setIsOpen }) => {
           marks: [
             {
               type: 'link',
-              attrs: { href: finalUrl, target: '_blank' }
+              attrs: { href: finalUrl } // Remove target="_blank"
             }
           ]
         })
@@ -449,7 +449,7 @@ const LinkDialog = ({ editor, isOpen, setIsOpen }) => {
       editor
         .chain()
         .focus()
-        .setLink({ href: finalUrl, target: '_blank' })
+        .setLink({ href: finalUrl }) // Remove target="_blank"
         .run()
     } else {
       // Just insert the URL as a link if no selection and no text provided
@@ -462,7 +462,7 @@ const LinkDialog = ({ editor, isOpen, setIsOpen }) => {
           marks: [
             {
               type: 'link',
-              attrs: { href: finalUrl, target: '_blank' }
+              attrs: { href: finalUrl } // Remove target="_blank"
             }
           ]
         })
@@ -770,10 +770,10 @@ const TipTapEditor = ({ content, onChange, placeholder = "Write your content her
         },
       }),
       Link.configure({
-        openOnClick: false,
+        openOnClick: false, // Keep this to prevent opening on click in the editor
         HTMLAttributes: {
           class: 'text-primary underline underline-offset-4',
-          target: '_blank', // Open links in new tab
+          target: '_blank', // Open links in new taben in same tab
           rel: 'noopener noreferrer', // Security best practice for links
         },
         validate: href => /^https?:\/\//.test(href), // Only allow http/https links
