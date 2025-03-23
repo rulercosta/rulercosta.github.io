@@ -1,0 +1,43 @@
+baseURL = "https://rulercosta.github.io/neuralwired/"
+languageCode = "en-us"
+title = "neuralwired"
+
+# Control content summary length
+summaryLength = 30
+
+# Enable syntax highlighting
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+
+# Ensure proper MIME types for CSS
+[mediaTypes]
+  [mediaTypes."text/css"]
+    suffixes = ["css"]
+
+[outputFormats]
+  [outputFormats.CSS]
+    mediaType = "text/css"
+    isPlainText = false
+    isHTML = false
+
+# Default static file configuration
+[server]
+  [[server.headers]]
+    for = "/**/*.css"
+    [server.headers.values]
+      Content-Type = "text/css"
+
+[params]
+  description = "neuralwired blog - thoughts and ideas"
+  author = "neuralwired"
+  
+  # Introduction text for homepage
+  introduction = "Welcome to my minimalist blog where I write about web development, technology, and programming. This is a static site built with Hugo, styled to match the original site exactly."
+  
+  # Excerpt length - controls default truncation
+  excerptLength = 100
+  
+  # Social links (used in footer)
+  github = "https://github.com/rulercosta"
+  linkedin = "https://linkedin.com"
+  twitter = "https://twitter.com"
