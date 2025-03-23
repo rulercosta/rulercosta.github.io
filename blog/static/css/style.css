@@ -103,6 +103,12 @@ ul {
     padding-left: 2.5rem;
 }
 
+ol {
+    list-style-position: inside;
+    margin-bottom: 1.5rem;
+    padding-left: 0.5rem;
+}
+
 li {
     margin-bottom: 0.5rem;
 }
