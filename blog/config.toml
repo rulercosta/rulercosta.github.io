@@ -1,6 +1,6 @@
 baseURL = "https://rulercosta.github.io/"
 languageCode = "en-us"
-title = "neuralwired"
+title = "cryptoknights"
 
 # Control content summary length
 summaryLength = 30
@@ -28,8 +28,8 @@ pygmentsUseClasses = true
       Content-Type = "text/css"
 
 [params]
-  description = "neuralwired blog - thoughts and ideas"
-  author = "neuralwired"
+  description = "cryptoknights blog - thoughts and ideas"
+  author = "rulercosta"
   
   # Introduction text for homepage
   introduction = "Welcome to my minimalist blog where I write about web development, technology, and programming. This is a static site built with Hugo, styled to match the original site exactly."
