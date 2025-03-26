@@ -1,12 +1,12 @@
 ---
-title: "Welcome to Neuralwired"
+title: "Welcome to Cryptoknights"
 date: 2024-01-01
 draft: false
 description: "Welcome to my blog about machine learning, deep learning, and other technical topics."
 featured: true
 ---
 
-Hi, I'm neuralwired! This blog is dedicated to exploring the fascinating world of machine learning, deep learning, and various technical topics. Here, you'll find in-depth articles, tutorials, and insights about:
+Hi, I'm rulercosta! This blog is dedicated to exploring the fascinating world of machine learning, deep learning, and various technical topics. Here, you'll find in-depth articles, tutorials, and insights about:
 
 - Machine Learning Algorithms
 - Deep Neural Networks

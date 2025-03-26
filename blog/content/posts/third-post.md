@@ -63,7 +63,7 @@ jobs:
 Make sure your `config.toml` has the correct baseURL:
 
 ```toml
-baseURL = "https://rulercosta.github.io/neuralwired/" # GitHub Pages project site URL
+baseURL = "https://rulercosta.github.io/" # GitHub Pages project site URL
 ```
 
 ## Pushing Your Changes
