@@ -30,14 +30,11 @@ pygmentsUseClasses = true
 [params]
   description = "cryptoknights blog - thoughts and ideas"
   author = "rulercosta"
-  
-  # Introduction text for homepage
-  introduction = "Welcome to my minimalist blog where I write about web development, technology, and programming. This is a static site built with Hugo, styled to match the original site exactly."
-  
+    
   # Excerpt length - controls default truncation
   excerptLength = 100
   
   # Social links (used in footer)
   github = "https://github.com/rulercosta"
-  linkedin = "https://linkedin.com"
-  twitter = "https://twitter.com"
+  linkedin = "https://linkedin.com/in/anubhav03111"
+  twitter = "https://twitter.com/rulercostax"
