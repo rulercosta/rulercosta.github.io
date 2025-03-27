@@ -5,22 +5,22 @@
     {{ end }}
     
     {{ if .Params.featuredImage }}
-        <a href="{{ .Permalink }}" class="post-preview-image">
+        <div class="post-preview-image">
             <img src="{{ .Params.featuredImage }}" alt="{{ .Title }}">
-        </a>
+        </div>
     {{ else if not $firstImage }}
         {{ $images := findRE "<img src=\"([^\"]+)\"" .Content 1 }}
         {{ if ge (len $images) 1 }}
             {{ $imgTag := index $images 0 }}
             {{ $imgSrc := replaceRE "<img src=\"([^\"]+)\"" "$1" $imgTag }}
-            <a href="{{ .Permalink }}" class="post-preview-image">
+            <div class="post-preview-image">
                 <img src="{{ $imgSrc }}" alt="{{ .Title }}">
-            </a>
+            </div>
         {{ end }}
     {{ else }}
-        <a href="{{ .Permalink }}" class="post-preview-image">
+        <div class="post-preview-image">
             <img src="{{ $firstImage.RelPermalink }}" alt="{{ .Title }}">
-        </a>
+        </div>
     {{ end }}
     
     <div class="post-card-content">
