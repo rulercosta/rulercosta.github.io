@@ -312,7 +312,7 @@ footer .container {
 
 .post-card {
   padding: 1.5rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-solid);
   border-radius: 4px;
   margin-bottom: 1.5rem;
   background-color: var(--card-bg);
