@@ -4,6 +4,7 @@ date: {{ .Date }}
 draft: true
 featured: false
 excerpt: ""
+# featuredImage: "/images/your-image.jpg"
 ---
 
 ## Introduction

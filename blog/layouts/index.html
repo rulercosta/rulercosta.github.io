@@ -14,20 +14,7 @@
         <h2>Featured Posts</h2>
         <div class="post-grid">
             {{ range where .Site.RegularPages "Params.featured" true }}
-            <article class="post-card">
-                <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                <div class="post-meta">
-                    <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-                </div>
-                <div class="post-excerpt">
-                    {{ with .Params.excerpt }}
-                        {{ . | truncate 100 }}
-                    {{ else }}
-                        {{ .Summary | truncate 100 }}
-                    {{ end }}
-                </div>
-                <a href="{{ .Permalink }}" class="read-more">read more →</a>
-            </article>
+                {{ partial "post-card.html" . }}
             {{ end }}
         </div>
     </section>
@@ -39,20 +26,7 @@
         </div>
         <div class="post-grid">
             {{ range first 4 (where .Site.RegularPages "Section" "posts") }}
-            <article class="post-card">
-                <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                <div class="post-meta">
-                    <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-                </div>
-                <div class="post-excerpt">
-                    {{ with .Params.excerpt }}
-                        {{ . | truncate 100 }}
-                    {{ else }}
-                        {{ .Summary | truncate 100 }}
-                    {{ end }}
-                </div>
-                <a href="{{ .Permalink }}" class="read-more">read more →</a>
-            </article>
+                {{ partial "post-card.html" . }}
             {{ end }}
         </div>
     </section>

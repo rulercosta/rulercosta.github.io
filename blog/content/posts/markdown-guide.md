@@ -4,6 +4,7 @@ date: 2024-01-15
 draft: false
 featured: true
 description: "A comprehensive guide to using Markdown in Hugo blog posts with examples and best practices."
+featuredImage: "https://res.cloudinary.com/dmtpkmctr/image/upload/v1741981563/hxhlrn56piszz4l7lqfg.jpg"
 ---
 
 ## Introduction to Markdown

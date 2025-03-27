@@ -1,0 +1,39 @@
+<article class="post-card">
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <div class="post-meta">
+        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+    </div>
+    
+    {{ $firstImage := .Resources.GetMatch "featured-image.*" }}
+    {{ if not $firstImage }}
+        {{ $firstImage = .Resources.GetMatch "*.{jpg,jpeg,png,gif,webp}" }}
+    {{ end }}
+    
+    {{ if .Params.featuredImage }}
+        <a href="{{ .Permalink }}" class="post-preview-image">
+            <img src="{{ .Params.featuredImage }}" alt="{{ .Title }}">
+        </a>
+    {{ else if not $firstImage }}
+        {{ $images := findRE "<img src=\"([^\"]+)\"" .Content 1 }}
+        {{ if ge (len $images) 1 }}
+            {{ $imgTag := index $images 0 }}
+            {{ $imgSrc := replaceRE "<img src=\"([^\"]+)\"" "$1" $imgTag }}
+            <a href="{{ .Permalink }}" class="post-preview-image">
+                <img src="{{ $imgSrc }}" alt="{{ .Title }}">
+            </a>
+        {{ end }}
+    {{ else }}
+        <a href="{{ .Permalink }}" class="post-preview-image">
+            <img src="{{ $firstImage.RelPermalink }}" alt="{{ .Title }}">
+        </a>
+    {{ end }}
+    
+    <div class="post-excerpt">
+        {{ with .Params.excerpt }}
+            {{ . | truncate 80 }}
+        {{ else }}
+            {{ .Summary | truncate 80 }}
+        {{ end }}
+    </div>
+    <a href="{{ .Permalink }}" class="read-more">read more →</a>
+</article>
