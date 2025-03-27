@@ -537,14 +537,7 @@ footer .container {
         font-size: 2.2rem; 
     }
 
-    .post-preview-image {
-        height: 120px;
-    }
-    
-    .post-no-image {
-        height: 100px;
-    }
-
+    /* Fix for post cards and images on mobile */
     .post-card {
         flex-direction: row;
         min-height: 120px;
@@ -553,10 +546,31 @@ footer .container {
     .post-preview-image {
         width: 120px;
         min-width: 120px;
+        height: 100%; 
+        position: relative;
+        border-radius: 0;
+    }
+    
+    .post-preview-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 0;
     }
     
     .post-card-content {
-        padding: 1rem;
+        padding: 0.8rem;
+        flex: 1;
+    }
+    
+    .post-excerpt {
+        max-height: 3.4rem;
+        overflow: hidden;
+        margin: 0.5rem 0;
+        font-size: 0.85rem;
     }
 }
 
