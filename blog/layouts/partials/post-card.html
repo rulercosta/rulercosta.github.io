@@ -1,9 +1,4 @@
 <article class="post-card">
-    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-    <div class="post-meta">
-        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-    </div>
-    
     {{ $firstImage := .Resources.GetMatch "featured-image.*" }}
     {{ if not $firstImage }}
         {{ $firstImage = .Resources.GetMatch "*.{jpg,jpeg,png,gif,webp}" }}
@@ -28,12 +23,19 @@
         </a>
     {{ end }}
     
-    <div class="post-excerpt">
-        {{ with .Params.excerpt }}
-            {{ . | truncate 80 }}
-        {{ else }}
-            {{ .Summary | truncate 80 }}
-        {{ end }}
+    <div class="post-card-content">
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        <div class="post-meta">
+            <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+        </div>
+        
+        <div class="post-excerpt">
+            {{ with .Params.excerpt }}
+                {{ . | truncate 80 }}
+            {{ else }}
+                {{ .Summary | truncate 80 }}
+            {{ end }}
+        </div>
+        <a href="{{ .Permalink }}" class="read-more">read more →</a>
     </div>
-    <a href="{{ .Permalink }}" class="read-more">read more →</a>
 </article>
