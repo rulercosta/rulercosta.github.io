@@ -537,10 +537,10 @@ footer .container {
         font-size: 2.2rem; 
     }
 
-    /* Fix for post cards and images on mobile */
     .post-card {
         flex-direction: row;
         min-height: 120px;
+        max-height: none; 
     }
     
     .post-preview-image {
@@ -564,13 +564,65 @@ footer .container {
     .post-card-content {
         padding: 0.8rem;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0; 
+    }
+    
+    .post-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .post-meta {
+        margin-bottom: 0.5rem;
     }
     
     .post-excerpt {
-        max-height: 3.4rem;
+        max-height: 2.8rem; 
         overflow: hidden;
-        margin: 0.5rem 0;
-        font-size: 0.85rem;
+        margin: 0.3rem 0;
+        font-size: 0.8rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .read-more {
+        margin-top: 0.4rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .post-card {
+        min-height: 100px;
+    }
+    
+    .post-preview-image {
+        width: 90px;
+        min-width: 90px;
+    }
+    
+    .post-card-content {
+        padding: 0.6rem;
+    }
+    
+    .post-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .post-excerpt {
+        max-height: 2.4rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
     }
 }
 
