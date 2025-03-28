@@ -265,6 +265,7 @@ li {
     text-decoration: none;
     font-size: 1.2rem;
     border-bottom: 1px solid var(--border-color);
+    text-align: center; 
 }
 
 .menu-content ul li a:hover {
