@@ -10,6 +10,8 @@
     --border-solid: #000;
     --card-bg: #fff;
     --text-muted: #555;
+    --menu-overlay: rgba(0, 0, 0, 0.3);
+    --menu-bg: #fff;
     
     --header-height: 80px; 
     --footer-height: 60px;
@@ -28,6 +30,8 @@
     --border-solid: #fff;
     --card-bg: #1a1a1a;
     --text-muted: #bbb;
+    --menu-overlay: rgba(0, 0, 0, 0.5);
+    --menu-bg: #111;
 }
 
 html * {
@@ -222,6 +226,71 @@ li {
 
 .theme-toggle:hover {
     opacity: 0.7;
+}
+
+.menu-container {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: var(--menu-overlay);
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.menu-content {
+    background-color: var(--menu-bg);
+    width: 100%;
+    transform: translateY(-100%);
+    border-bottom: 1px solid var(--border-solid);
+    box-sizing: border-box;
+}
+
+.menu-open .menu-container {
+    visibility: visible;
+    opacity: 1;
+}
+
+.menu-open .menu-content {
+    transform: translateY(0);
+}
+
+.menu-content nav {
+    padding: 0;
+}
+
+.menu-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-content ul li {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-content ul li a {
+    display: block;
+    padding: 1rem 2rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.menu-content ul li a:hover {
+    background-color: var(--light-gray);
+}
+
+.menu-content ul li a.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 footer {
@@ -608,6 +677,10 @@ footer .container {
     .read-more {
         margin-top: 0.4rem;
         font-size: 0.8rem;
+    }
+    
+    .menu-content {
+        width: 100%;
     }
 }
 
