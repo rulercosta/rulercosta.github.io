@@ -153,7 +153,7 @@ li {
     height: 100%;
 }
 
-.home-button {
+.home-button, .theme-toggle {
     background: none;
     border: none;
     cursor: pointer;
@@ -167,9 +167,10 @@ li {
     justify-content: center;
     height: calc(var(--header-height) - 2px);
     text-decoration: none;
+    width: 40px; 
 }
 
-.home-button:hover {
+.home-button:hover, .theme-toggle:hover {
     opacity: 0.7;
 }
 
@@ -208,25 +209,6 @@ li {
     align-items: center;
     gap: 1.5rem; 
     height: calc(var(--header-height) - 2px);
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: "Space Mono", monospace;
-    font-size: 2.5rem; 
-    padding: 0 0.25rem;
-    color: var(--text-color);
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(var(--header-height) - 2px);
-}
-
-.theme-toggle:hover {
-    opacity: 0.7;
 }
 
 .menu-container {
@@ -593,9 +575,11 @@ footer .container {
         font-size: 1.6rem; 
     }
 
-    .theme-toggle {
+    .home-button, .theme-toggle {
         font-size: 2.2rem; 
         padding: 0 0.15rem;
+        width: 36px; 
+        height: calc(var(--header-height) - 2px);
     }
 
     .header-icons {
@@ -612,10 +596,6 @@ footer .container {
 
     .header-right {
         right: var(--header-padding); 
-    }
-
-    .home-button {
-        font-size: 2.2rem; 
     }
 
     .post-card {
@@ -708,6 +688,10 @@ footer .container {
         max-height: none;
         -webkit-line-clamp: initial;
         line-clamp: initial;
+    }
+
+    .home-button, .theme-toggle {
+        font-size: 2rem; 
     }
 }
 
