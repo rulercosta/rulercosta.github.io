@@ -320,12 +320,14 @@ footer .container {
   flex-direction: row;
   align-items: stretch;
   overflow: hidden;
-  min-height: 150px; 
+  min-height: auto; 
 }
 
 .post-card-content {
   flex: 1;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .post-card h3 {
@@ -352,13 +354,22 @@ footer .container {
 }
 
 .post-excerpt {
-    margin: 1rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  overflow: visible;
+  max-height: none;
+  position: relative;
+}
+
+.post-excerpt::after {
+  display: none; 
 }
 
 .read-more {
-    display: inline-block;
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
+  display: inline-block;
+  margin-top: auto;
+  font-size: 0.9rem;
 }
 
 .featured-posts {
@@ -421,8 +432,8 @@ footer .container {
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1rem;
-  overflow: hidden;
-  max-height: 4.5rem; 
+  overflow: visible;
+  max-height: none;
   position: relative;
 }
 
@@ -539,7 +550,7 @@ footer .container {
 
     .post-card {
         flex-direction: row;
-        min-height: 120px;
+        min-height: auto;
         max-height: none; 
     }
     
@@ -582,13 +593,13 @@ footer .container {
     }
     
     .post-excerpt {
-        max-height: 2.8rem; 
-        overflow: hidden;
+        max-height: none; 
+        overflow: visible;
         margin: 0.3rem 0;
         font-size: 0.8rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
+        display: block;
+        -webkit-line-clamp: initial;
+        line-clamp: initial;
         -webkit-box-orient: vertical;
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -602,7 +613,7 @@ footer .container {
 
 @media screen and (max-width: 400px) {
     .post-card {
-        min-height: 100px;
+        min-height: auto;
     }
     
     .post-preview-image {
@@ -620,9 +631,9 @@ footer .container {
     }
     
     .post-excerpt {
-        max-height: 2.4rem;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
+        max-height: none;
+        -webkit-line-clamp: initial;
+        line-clamp: initial;
     }
 }
 

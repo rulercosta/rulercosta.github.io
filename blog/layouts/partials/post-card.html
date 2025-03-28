@@ -31,9 +31,9 @@
         
         <div class="post-excerpt">
             {{ with .Params.excerpt }}
-                {{ . | truncate 80 }}
+                {{ . }}
             {{ else }}
-                {{ .Summary | truncate 80 }}
+                {{ .Summary | truncate 150 }}
             {{ end }}
         </div>
         <a href="{{ .Permalink }}" class="read-more">read more →</a>
