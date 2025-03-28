@@ -4,7 +4,7 @@ date: 2024-01-15
 draft: false
 featured: true
 description: "A comprehensive guide to using Markdown in Hugo blog posts with examples and best practices."
-featuredImage: "https://res.cloudinary.com/dmtpkmctr/image/upload/v1741981563/hxhlrn56piszz4l7lqfg.jpg"
+featuredImage: "https://i.ibb.co/4RKGMcYn/1737232148498.jpg"
 ---
 
 ## Introduction to Markdown
@@ -102,7 +102,7 @@ To add an image, use the following syntax:
 
 Here's an example image from this blog:
 
-![Markdown Syntax Highlighting](https://res.cloudinary.com/dmtpkmctr/image/upload/v1741981563/hxhlrn56piszz4l7lqfg.jpg "Markdown code with syntax highlighting")
+![Markdown Syntax Highlighting](https://i.ibb.co/4RKGMcYn/1737232148498.jpg "Markdown code with syntax highlighting")
 
 ## Code Blocks
 
