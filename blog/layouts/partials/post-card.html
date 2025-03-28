@@ -33,7 +33,7 @@
             {{ with .Params.excerpt }}
                 {{ . }}
             {{ else }}
-                {{ .Summary | truncate 150 }}
+                {{ .Summary | plainify | truncate 25 }}
             {{ end }}
         </div>
         <a href="{{ .Permalink }}" class="read-more">read more →</a>
