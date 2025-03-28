@@ -2,6 +2,7 @@
 title: "About"
 date: 2024-01-01
 draft: false
+layout: "page"
 ---
 
 Hi, I'm rulercosta! I'm passionate about artificial intelligence, machine learning, and software engineering. This blog serves as a platform where I share my knowledge, experiences, and insights about these fascinating fields.
