@@ -1,10 +1,12 @@
 {{ define "main" }}
 <header>
+    {{ if and (ne .RelPermalink "/about/") (ne .Section "about") }}
     <div class="site-nav page-nav">
         <ul>
             <li><a href="{{ if .Parent }}{{ .Parent.Permalink }}{{ else }}{{ .Site.BaseURL }}{{ end }}">← back</a></li>
         </ul>
     </div>
+    {{ end }}
 </header>
 
 <main>

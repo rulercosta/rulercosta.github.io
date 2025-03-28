@@ -6,11 +6,13 @@
         <p>{{ . }}</p>
         {{ end }}
     </div>
+    {{ if not (or (eq .Section "posts") (eq .Section "tags") (eq .Section "categories")) }}
     <div class="site-nav page-nav">
         <ul>
             <li><a href="{{ .Site.BaseURL }}">← back to home</a></li>
         </ul>
     </div>
+    {{ end }}
 </header>
 
 <main>
