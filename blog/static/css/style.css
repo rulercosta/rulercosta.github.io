@@ -16,6 +16,10 @@
     --header-height: 80px; 
     --footer-height: 60px;
     --header-padding: 1rem;
+
+    --scrollbar-bg: rgba(0, 0, 0, 0.05);
+    --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+    --scrollbar-width: 10px;
 }
 
 :root[data-theme="dark"] {
@@ -32,10 +36,22 @@
     --text-muted: #bbb;
     --menu-overlay: rgba(0, 0, 0, 0.5);
     --menu-bg: #111;
+
+    --scrollbar-bg: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
 }
 
 html * {
     transition: none !important;
+}
+
+html {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+html::-webkit-scrollbar {
+    display: none; 
 }
 
 * {
@@ -53,6 +69,8 @@ body {
     padding: 0 1rem;
     padding-top: var(--header-height);
     min-height: 100vh;
+    overflow-y: auto;
+    position: relative;
 }
 
 .container {
@@ -60,6 +78,7 @@ body {
     margin: 0 auto;
     padding: 2rem 1rem;
     padding-bottom: calc(var(--footer-height) + 2rem);
+    padding-right: calc(1rem + var(--scrollbar-width));
 }
 
 h1, h2, h3 {
@@ -539,10 +558,41 @@ footer .container {
   text-decoration: underline;
 }
 
+.custom-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--scrollbar-width);
+    height: 100vh;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.scrollbar-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--scrollbar-width);
+    height: 100%;
+    background: var(--scrollbar-bg);
+}
+
+.scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--scrollbar-width);
+    background: var(--scrollbar-thumb);
+    border-radius: calc(var(--scrollbar-width) / 2);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
 @media screen and (max-width: 600px) {
     :root {
         --header-padding: 0.75rem;
         --header-height: 80px; 
+        --scrollbar-width: 6px;
     }
     
     body {
@@ -561,6 +611,7 @@ footer .container {
     .container {
         padding: 1.5rem 0.75rem;
         padding-bottom: calc(var(--footer-height) + 2rem);
+        padding-right: calc(0.75rem + var(--scrollbar-width));
     }
     
     .site-header .container {

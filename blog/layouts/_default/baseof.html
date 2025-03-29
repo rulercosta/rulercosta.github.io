@@ -4,6 +4,11 @@
     {{ partial "head.html" . }}
 </head>
 <body>
+    <div class="custom-scrollbar">
+        <div class="scrollbar-track"></div>
+        <div class="scrollbar-thumb"></div>
+    </div>
+    
     <header class="site-header" id="header-container">
         {{ partial "header.html" . }}
     </header>
@@ -54,6 +59,63 @@
                         document.body.classList.remove('menu-open');
                     }
                 });
+            }
+            
+            const scrollbarThumb = document.querySelector('.scrollbar-thumb');
+            
+            updateScrollbar();
+            
+            window.addEventListener('scroll', updateScrollbar);
+            window.addEventListener('resize', updateScrollbar);
+            
+            let isDragging = false;
+            let startY = 0;
+            let startScroll = 0;
+            
+            if (scrollbarThumb) {
+                scrollbarThumb.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startY = e.clientY;
+                    startScroll = window.scrollY;
+                    document.body.style.userSelect = 'none'; 
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    const deltaY = e.clientY - startY;
+                    const scrollRatio = document.documentElement.scrollHeight / window.innerHeight;
+                    window.scrollTo(0, startScroll + deltaY * scrollRatio);
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    document.body.style.userSelect = '';
+                });
+            }
+            
+            function updateScrollbar() {
+                if (scrollbarThumb) {
+                    const windowHeight = window.innerHeight;
+                    const docHeight = document.documentElement.scrollHeight;
+                    
+                    if (docHeight <= windowHeight) {
+                        scrollbarThumb.style.display = 'none';
+                        return;
+                    }
+                    
+                    scrollbarThumb.style.display = 'block';
+                    
+                    const scrollPercentage = windowHeight / docHeight;
+                    const thumbHeight = Math.max(windowHeight * scrollPercentage, 30); 
+                    scrollbarThumb.style.height = thumbHeight + 'px';
+                    
+                    const scrollPosition = window.scrollY;
+                    const maxScrollPosition = docHeight - windowHeight;
+                    const scrollRatio = scrollPosition / maxScrollPosition;
+                    const thumbPosition = scrollRatio * (windowHeight - thumbHeight);
+                    scrollbarThumb.style.top = thumbPosition + 'px';
+                }
             }
 
             document.body.style.visibility = 'visible';
