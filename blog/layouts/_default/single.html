@@ -13,9 +13,11 @@
     <article class="blog-post">
         <header class="post-header">
             <h1 class="post-title">{{ .Title }}</h1>
+            {{ if and (not (eq .File.LogicalName "resume.html")) (not (eq .Date.Year 1)) }}
             <div class="post-meta">
                 <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
             </div>
+            {{ end }}
         </header>
         <div class="post-content">
             {{ .Content }}
