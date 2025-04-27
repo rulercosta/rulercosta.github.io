@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anubhav Kesarwani - Resume</title>
+  <link rel="stylesheet" href="blog/static/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Space Mono', 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      background: #fff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    .resume-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 40px 36px 32px 36px;
+      border-radius: 8px;
+    }
+    .resume-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .resume-header h1 {
+      font-size: 2.5em;
+      margin: 0 0 8px 0;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .contact-info {
+      font-size: 1em;
+      color: #444;
+      margin-bottom: 8px;
+    }
+    .contact-info i {
+      margin-right: 6px;
+      color: #000 !important;
+    }
+    .contact-info a {
+      color: #000 !important;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    .section {
+      margin-top: 32px;
+    }
+    .section-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+      color: #222;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      border-bottom: 2px solid #222;
+      margin-top: 4px;
+      width: 100%;
+    }
+    .resume-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .resume-item {
+      margin-bottom: 18px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-weight: bold;
+      font-size: 1.05em;
+    }
+    .item-subheader {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.98em;
+      color: #555;
+      margin-bottom: 2px;
+    }
+    .item-details {
+      margin-left: 12px;
+      font-size: 0.98em;
+      color: #222;
+      list-style: disc inside;
+    }
+    .item-details li {
+      list-style-type: disc;
+    }
+    .skills-list {
+      margin-left: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .skills-list li {
+      margin-bottom: 2px;
+    }
+    @media (max-width: 600px) {
+      .resume-container {
+        padding: 16px 4vw;
+      }
+      .item-header, .item-subheader {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-container">
+    <div class="resume-header">
+      <h1>Anubhav Kesarwani</h1>
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> 8707621218</span>
+        <a href="mailto:anubhav03111@gmail.com"><i class="fas fa-envelope"></i>email</a>
+        <a href="https://linkedin.com/in/neuralwired"><i class="fab fa-linkedin"></i>linkedin</a>
+        <a href="https://github.com/rulercosta"><i class="fab fa-github"></i>github</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Education</div>
+      <ul class="resume-list">
+        <li class="resume-item">
+          <div class="item-header">
+            United College of Engineering & Research
+            <span>Nov. 2022 -- Present</span>
+          </div>
+          <div class="item-subheader">
+            Bachelor of Technology in Computer Science & Engineering
+            <span>Prayagraj, India</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Internships & Training</div>
+      <ul class="resume-list">
+        <li class="resume-item">
+          <div class="item-header">
+            AICTE x Shell x Edunet Foundation
+            <span>Apr 2025 -- Present</span>
+          </div>
+          <div class="item-subheader">
+            Intern – Green Skills using AI
+            <span>Remote (Virtual)</span>
+          </div>
+          <ul class="item-details">
+            <li>Developing <i>Windpower Generation Forecasting</i> prototype with DAX, model selection, and dashboarding.</li>
+          </ul>
+        </li>
+        <li class="resume-item">
+          <div class="item-header">
+            United Global Infoservice Pvt. Ltd.
+            <span>Aug 2024</span>
+          </div>
+          <div class="item-subheader">
+            Summer Trainee – Generative AI & NLP
+            <span>UCER, Prayagraj</span>
+          </div>
+          <ul class="item-details">
+            <li>Built Bi-LSTM model for Bitcoin price prediction; used PyTorch, NumPy, and evaluation metrics like RMSE.</li>
+          </ul>
+        </li>
+        <li class="resume-item">
+          <div class="item-header">
+            Ministry of MSME, Government of India
+            <span>Jan 2024</span>
+          </div>
+          <div class="item-subheader">
+            Participant – MDP (Operations Management)
+            <span>UCER, Prayagraj</span>
+          </div>
+          <ul class="item-details">
+            <li>Trained in supply chain, production planning, and process optimization during 6-day Govt.-sponsored program.</li>
+          </ul>
+        </li>
+        <li class="resume-item">
+          <div class="item-header">
+            Netcamp Solutions Pvt. Ltd.
+            <span>Sept 2023 -- Oct 2023</span>
+          </div>
+          <div class="item-subheader">
+            Summer Intern – Web Dev & Project Management
+            <span>UCER, Prayagraj</span>
+          </div>
+          <ul class="item-details">
+            <li>Built a web project using HTML, CSS, JS; assisted in task planning and delivery tracking.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Hackathons & Technical Competitions</div>
+      <ul class="resume-list">
+        <li class="resume-item">
+          <div class="item-header">
+            AKTU Literary, Technical and Management Fest
+            <span>Dec 2024</span>
+          </div>
+          <div class="item-subheader">
+            Participant – Robotics Competition
+            <span>CAS, Lucknow</span>
+          </div>
+          <ul class="item-details">
+            <li>Advanced through eliminations by optimizing sensor feedback loops and actuator controls.</li>
+          </ul>
+        </li>
+        <li class="resume-item">
+          <div class="item-header">
+            AKTU Zonal Robowars – <b>1st Place</b>
+            <span>Nov 2024</span>
+          </div>
+          <div class="item-subheader">
+            Winner – Robotics Competition
+            <span>UCER, Prayagraj</span>
+          </div>
+          <ul class="item-details">
+            <li>Engineered combat bot with adaptive obstacle avoidance and efficient speed control.</li>
+          </ul>
+        </li>
+        <li class="resume-item">
+          <div class="item-header">
+            Meta AI Hackathon
+            <span>Oct 2024</span>
+          </div>
+          <div class="item-subheader">
+            Participant – Hackathon
+            <span>Bengaluru, Karnataka</span>
+          </div>
+          <ul class="item-details">
+            <li>Built LangGraph-based disinformation detection with LLaMA 3.x; integrated into WhatsApp Business API.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <ul class="skills-list">
+        <li><b>Languages:</b> Python, C, C++, Java, JavaScript, HTML/CSS, SQL</li>
+        <li><b>Tools & Platforms:</b> VS Code, Google Colab, GitHub, LaTeX Workshop</li>
+        <li><b>Technologies & Frameworks:</b> PyTorch, Flask, Linux</li>
+        <li><b>Libraries:</b> NumPy, Pandas, React, Matplotlib, NLTK</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Leadership / Extracurricular</div>
+      <ul class="resume-list">
+        <li class="resume-item">
+          <div class="item-header">
+            Quantum Minds – UCER
+            <span>July 2024 -- Present</span>
+          </div>
+          <div class="item-subheader">
+            Secretary
+            <span>United College of Engineering & Research, Prayagraj</span>
+          </div>
+          <ul class="item-details">
+            <li>Designed and developed the club’s full-stack website with CMS, certificate distribution, participant management, and gallery modules using React and Flask.</li>
+            <li>Implemented an authenticated dashboard for admins to manage events, send emails, and automate workflows.</li>
+            <li>Organized workshops, and talks; boosted student engagement and led technical initiatives.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
