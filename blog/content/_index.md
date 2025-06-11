@@ -2,4 +2,4 @@
 title: ""
 ---
 
-# Welcome to CryptoKnights!
+# Welcome to neuralwired!
