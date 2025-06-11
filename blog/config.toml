@@ -1,6 +1,6 @@
-baseURL = "https://rulercosta.github.io/"
+baseURL = "https://neuralwired.github.io/"
 languageCode = "en-us"
-title = "cryptoknights"
+title = "neuralwired"
 
 # Control content summary length
 summaryLength = 30
@@ -28,13 +28,13 @@ pygmentsUseClasses = true
       Content-Type = "text/css"
 
 [params]
-  description = "cryptoknights blog - thoughts and ideas"
-  author = "rulercosta"
+  description = "neuralwired blog - thoughts and ideas"
+  author = "neuralwired"
     
   # Excerpt length - controls default truncation
   excerptLength = 100
   
   # Social links (used in footer)
-  github = "https://github.com/rulercosta"
-  linkedin = "https://linkedin.com/in/anubhav03111"
-  twitter = "https://twitter.com/rulercostax"
+  github = "https://github.com/neuralwired"
+  linkedin = "https://linkedin.com/in/neuralwired"
+  twitter = "https://twitter.com/neuralwired"
